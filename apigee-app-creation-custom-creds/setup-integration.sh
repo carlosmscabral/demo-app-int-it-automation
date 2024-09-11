@@ -20,5 +20,5 @@ source ./env.sh
 # integrationcli integrations scaffold -n apigee-create-client-app -s 1 -e dev --cloud-build --cloud-deploy
 # integrationcli integrations scaffold -n apigee-create-client-app -s 1 -e dev --cloud-build --cloud-deploy --skip-connectors
 
-# Deploy with: (change overrides for connection name to use the config variable name)
+# Deploy with: (change overrides / authconfigs accordingly)
 # integrationcli integrations apply -f . -e dev --wait=true

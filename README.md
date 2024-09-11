@@ -14,6 +14,8 @@ This simple integration leverages service accounts and the Apigee REST API to cr
 
 This is helpful in scenarios of migration from other APIM solutions towards Apigee, synchronization with IdPs, etc.
 
+This sample requires the creation of a service account with Apigee Developer Admin permissions - make sure to update the authconfig with your own service account name before deploying.
+
 # Support
 
 This is not an officially supported Google product
