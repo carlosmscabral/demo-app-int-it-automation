@@ -8,6 +8,8 @@ It also requires (integrationcli)[https://github.com/GoogleCloudPlatform/applica
 
 ## apigee-app-creation-custom-creds
 
+### [apigee-app-creation-custom-creds](apigee-app-creation-custom-creds)
+
 This simple integration leverages service accounts and the Apigee REST API to create a new developer app with the inputs being the desired key and secret. It automatically deletes the auto-generated credentials that Apigee sets when the app is created.
 
 This is helpful in scenarios of migration from other APIM solutions towards Apigee, synchronization with IdPs, etc.
