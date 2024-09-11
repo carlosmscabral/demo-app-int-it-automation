@@ -1,0 +1,11 @@
+{
+	"displayName": "apigee-cabral-profile",
+	"visibility": "CLIENT_VISIBLE",
+	"decryptedCredential": {
+		"credentialType": "SERVICE_ACCOUNT",
+		"serviceAccountCredentials": {
+			"serviceAccount": "cabral-apigee-sa@cabral-app-integration.iam.gserviceaccount.com",
+			"scope": "https://www.googleapis.com/auth/cloud-platform"
+		}
+	}
+}

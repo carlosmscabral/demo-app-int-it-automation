@@ -1,0 +1,614 @@
+{
+	"snapshotNumber": "1",
+	"triggerConfigs": [
+		{
+			"label": "API Trigger",
+			"triggerType": "API",
+			"triggerNumber": "1",
+			"triggerId": "api_trigger/apigee-create-client-app_API_1",
+			"startTasks": [
+				{
+					"taskId": "1"
+				}
+			],
+			"properties": {
+				"Trigger name": "apigee-create-client-app_API_1"
+			}
+		}
+	],
+	"taskConfigs": [
+		{
+			"task": "FieldMappingTask",
+			"taskId": "1",
+			"parameters": {
+				"FieldMappingConfigTaskParameterKey": {
+					"key": "FieldMappingConfigTaskParameterKey",
+					"value": {
+						"jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.proto.FieldMappingConfig\",\n  \"mappedFields\": [{\n    \"inputField\": {\n      \"fieldType\": \"STRING_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$createAppURI$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"stringFunction\": {\n              \"functionName\": \"RESOLVE_TEMPLATE\"\n            }\n          }\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$createAppURI$\",\n      \"fieldType\": \"STRING_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"JSON_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$developerAppPayload$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"jsonFunction\": {\n              \"functionName\": \"RESOLVE_TEMPLATE\"\n            }\n          }\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$developerAppPayload$\",\n      \"fieldType\": \"JSON_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"JSON_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$credsPayload$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"jsonFunction\": {\n              \"functionName\": \"RESOLVE_TEMPLATE\"\n            }\n          }\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$credsPayload$\",\n      \"fieldType\": \"JSON_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"STRING_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$credsUri$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"stringFunction\": {\n              \"functionName\": \"RESOLVE_TEMPLATE\"\n            }\n          }\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$credsUri$\",\n      \"fieldType\": \"STRING_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }]\n}"
+					}
+				}
+			},
+			"displayName": "Prep URI \u0026 Payload",
+			"nextTasks": [
+				{
+					"taskId": "2"
+				}
+			],
+			"taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+			"externalTaskType": "NORMAL_TASK"
+		},
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "2",
+			"parameters": {
+				"additionalHeaders": {
+					"key": "additionalHeaders",
+					"value": {}
+				},
+				"authConfig": {
+					"key": "authConfig",
+					"value": {
+						"jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.authconfig.AuthConfigTaskParam\"\n}"
+					}
+				},
+				"authConfigName": {
+					"key": "authConfigName",
+					"value": {
+						"stringValue": "apigee-cabral-profile"
+					}
+				},
+				"disableSSLValidation": {
+					"key": "disableSSLValidation",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"followRedirects": {
+					"key": "followRedirects",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"httpMethod": {
+					"key": "httpMethod",
+					"value": {
+						"stringValue": "POST"
+					}
+				},
+				"httpParams": {
+					"key": "httpParams",
+					"value": {}
+				},
+				"jsonAdditionalHeaders": {
+					"key": "jsonAdditionalHeaders",
+					"value": {
+						"jsonValue": "null"
+					}
+				},
+				"requestBody": {
+					"key": "requestBody",
+					"value": {
+						"stringValue": "$developerAppPayload$"
+					}
+				},
+				"requestorId": {
+					"key": "requestorId",
+					"value": {
+						"stringValue": ""
+					}
+				},
+				"responseBody": {
+					"key": "responseBody",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_2_responseBody`$"
+							]
+						}
+					}
+				},
+				"responseHeader": {
+					"key": "responseHeader",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_2_responseHeader`$"
+							]
+						}
+					}
+				},
+				"responseStatus": {
+					"key": "responseStatus",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_2_responseStatus`$"
+							]
+						}
+					}
+				},
+				"throwError": {
+					"key": "throwError",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"timeout": {
+					"key": "timeout",
+					"value": {
+						"intValue": "0"
+					}
+				},
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$createAppURI$"
+					}
+				},
+				"urlFetchingService": {
+					"key": "urlFetchingService",
+					"value": {
+						"stringValue": "HARPOON"
+					}
+				},
+				"urlQueryStrings": {
+					"key": "urlQueryStrings",
+					"value": {}
+				},
+				"useSSL": {
+					"key": "useSSL",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"userAgent": {
+					"key": "userAgent",
+					"value": {
+						"stringValue": ""
+					}
+				}
+			},
+			"displayName": "Create App",
+			"nextTasks": [
+				{
+					"taskId": "3"
+				}
+			],
+			"taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+			"externalTaskType": "NORMAL_TASK"
+		},
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "3",
+			"parameters": {
+				"additionalHeaders": {
+					"key": "additionalHeaders",
+					"value": {}
+				},
+				"authConfig": {
+					"key": "authConfig",
+					"value": {
+						"jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.authconfig.AuthConfigTaskParam\"\n}"
+					}
+				},
+				"authConfigName": {
+					"key": "authConfigName",
+					"value": {
+						"stringValue": "apigee-cabral-profile"
+					}
+				},
+				"disableSSLValidation": {
+					"key": "disableSSLValidation",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"followRedirects": {
+					"key": "followRedirects",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"httpMethod": {
+					"key": "httpMethod",
+					"value": {
+						"stringValue": "POST"
+					}
+				},
+				"httpParams": {
+					"key": "httpParams",
+					"value": {}
+				},
+				"jsonAdditionalHeaders": {
+					"key": "jsonAdditionalHeaders",
+					"value": {
+						"jsonValue": "null"
+					}
+				},
+				"requestBody": {
+					"key": "requestBody",
+					"value": {
+						"stringValue": "$credsPayload$"
+					}
+				},
+				"requestorId": {
+					"key": "requestorId",
+					"value": {
+						"stringValue": ""
+					}
+				},
+				"responseBody": {
+					"key": "responseBody",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_3_responseBody`$"
+							]
+						}
+					}
+				},
+				"responseHeader": {
+					"key": "responseHeader",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_3_responseHeader`$"
+							]
+						}
+					}
+				},
+				"responseStatus": {
+					"key": "responseStatus",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_3_responseStatus`$"
+							]
+						}
+					}
+				},
+				"throwError": {
+					"key": "throwError",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"timeout": {
+					"key": "timeout",
+					"value": {
+						"intValue": "0"
+					}
+				},
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$credsUri$"
+					}
+				},
+				"urlFetchingService": {
+					"key": "urlFetchingService",
+					"value": {
+						"stringValue": "HARPOON"
+					}
+				},
+				"urlQueryStrings": {
+					"key": "urlQueryStrings",
+					"value": {}
+				},
+				"useSSL": {
+					"key": "useSSL",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"userAgent": {
+					"key": "userAgent",
+					"value": {
+						"stringValue": ""
+					}
+				}
+			},
+			"displayName": "Import Keys",
+			"nextTasks": [
+				{
+					"taskId": "4"
+				}
+			],
+			"taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+			"externalTaskType": "NORMAL_TASK"
+		},
+		{
+			"task": "FieldMappingTask",
+			"taskId": "4",
+			"parameters": {
+				"FieldMappingConfigTaskParameterKey": {
+					"key": "FieldMappingConfigTaskParameterKey",
+					"value": {
+						"jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.proto.FieldMappingConfig\",\n  \"mappedFields\": [{\n    \"inputField\": {\n      \"fieldType\": \"JSON_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$`Task_2_responseBody`$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"stringFunction\": {\n              \"functionName\": \"TO_JSON\"\n            }\n          }\n        }, {\n          \"functionType\": {\n            \"jsonFunction\": {\n              \"functionName\": \"GET_PROPERTY\"\n            }\n          },\n          \"parameters\": [{\n            \"initialValue\": {\n              \"literalValue\": {\n                \"stringValue\": \"credentials\"\n              }\n            }\n          }]\n        }, {\n          \"functionType\": {\n            \"jsonFunction\": {\n              \"functionName\": \"GET_ELEMENT\"\n            }\n          },\n          \"parameters\": [{\n            \"initialValue\": {\n              \"literalValue\": {\n                \"intValue\": \"0\"\n              }\n            }\n          }]\n        }, {\n          \"functionType\": {\n            \"jsonFunction\": {\n              \"functionName\": \"GET_PROPERTY\"\n            }\n          },\n          \"parameters\": [{\n            \"initialValue\": {\n              \"literalValue\": {\n                \"stringValue\": \"consumerKey\"\n              }\n            }\n          }]\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$apigeeKey$\",\n      \"fieldType\": \"STRING_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }, {\n    \"inputField\": {\n      \"fieldType\": \"STRING_VALUE\",\n      \"transformExpression\": {\n        \"initialValue\": {\n          \"referenceValue\": \"$deleteKeyUri$\"\n        },\n        \"transformationFunctions\": [{\n          \"functionType\": {\n            \"stringFunction\": {\n              \"functionName\": \"RESOLVE_TEMPLATE\"\n            }\n          }\n        }]\n      }\n    },\n    \"outputField\": {\n      \"referenceKey\": \"$deleteKeyUri$\",\n      \"fieldType\": \"STRING_VALUE\",\n      \"cardinality\": \"OPTIONAL\"\n    }\n  }]\n}"
+					}
+				}
+			},
+			"displayName": "Get Apigee Generated Key",
+			"nextTasks": [
+				{
+					"taskId": "5"
+				}
+			],
+			"taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+			"externalTaskType": "NORMAL_TASK"
+		},
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "5",
+			"parameters": {
+				"additionalHeaders": {
+					"key": "additionalHeaders",
+					"value": {}
+				},
+				"authConfig": {
+					"key": "authConfig",
+					"value": {
+						"jsonValue": "{\n  \"@type\": \"type.googleapis.com/enterprise.crm.eventbus.authconfig.AuthConfigTaskParam\"\n}"
+					}
+				},
+				"authConfigName": {
+					"key": "authConfigName",
+					"value": {
+						"stringValue": "apigee-cabral-profile"
+					}
+				},
+				"disableSSLValidation": {
+					"key": "disableSSLValidation",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"followRedirects": {
+					"key": "followRedirects",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"httpMethod": {
+					"key": "httpMethod",
+					"value": {
+						"stringValue": "DELETE"
+					}
+				},
+				"httpParams": {
+					"key": "httpParams",
+					"value": {}
+				},
+				"jsonAdditionalHeaders": {
+					"key": "jsonAdditionalHeaders",
+					"value": {
+						"jsonValue": "null"
+					}
+				},
+				"requestBody": {
+					"key": "requestBody",
+					"value": {
+						"stringValue": ""
+					}
+				},
+				"requestorId": {
+					"key": "requestorId",
+					"value": {
+						"stringValue": ""
+					}
+				},
+				"responseBody": {
+					"key": "responseBody",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_5_responseBody`$"
+							]
+						}
+					}
+				},
+				"responseHeader": {
+					"key": "responseHeader",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_5_responseHeader`$"
+							]
+						}
+					}
+				},
+				"responseStatus": {
+					"key": "responseStatus",
+					"value": {
+						"stringArray": {
+							"stringValues": [
+								"$`Task_5_responseStatus`$"
+							]
+						}
+					}
+				},
+				"throwError": {
+					"key": "throwError",
+					"value": {
+						"booleanValue": true
+					}
+				},
+				"timeout": {
+					"key": "timeout",
+					"value": {
+						"intValue": "0"
+					}
+				},
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$deleteKeyUri$"
+					}
+				},
+				"urlFetchingService": {
+					"key": "urlFetchingService",
+					"value": {
+						"stringValue": "HARPOON"
+					}
+				},
+				"urlQueryStrings": {
+					"key": "urlQueryStrings",
+					"value": {}
+				},
+				"useSSL": {
+					"key": "useSSL",
+					"value": {
+						"booleanValue": false
+					}
+				},
+				"userAgent": {
+					"key": "userAgent",
+					"value": {
+						"stringValue": ""
+					}
+				}
+			},
+			"displayName": "Remove Apigee Generated Key",
+			"taskExecutionStrategy": "WHEN_ALL_SUCCEED",
+			"externalTaskType": "NORMAL_TASK"
+		}
+	],
+	"integrationParameters": [
+		{
+			"key": "clientAppName",
+			"dataType": "STRING_VALUE",
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "apigeeOrg",
+			"dataType": "STRING_VALUE",
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "createAppURI",
+			"dataType": "STRING_VALUE",
+			"defaultValue": {
+				"stringValue": "https://apigee.googleapis.com/v1/organizations/$apigeeOrg$/developers/$developerEmail$/apps"
+			}
+		},
+		{
+			"key": "developerAppPayload",
+			"dataType": "JSON_VALUE",
+			"defaultValue": {
+				"jsonValue": "{\n  \"name\": \"$clientAppName$\",\n  \"developerId\": \"$developerId$\"\n}"
+			},
+			"jsonSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"developerId\": {\n      \"type\": \"string\"\n    },\n    \"name\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+		},
+		{
+			"key": "`Task_2_responseHeader`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_2"
+		},
+		{
+			"key": "`Task_2_responseBody`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_2"
+		},
+		{
+			"key": "`Task_2_responseStatus`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_2"
+		},
+		{
+			"key": "developerEmail",
+			"dataType": "STRING_VALUE",
+			"defaultValue": {
+				"stringValue": "c.arlosmscabral@gmail.com"
+			},
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "developerId",
+			"dataType": "STRING_VALUE",
+			"defaultValue": {
+				"stringValue": "21200ae9-3a19-4881-b86c-7be31b8644df"
+			},
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "clientId",
+			"dataType": "STRING_VALUE",
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "secret",
+			"dataType": "STRING_VALUE",
+			"inputOutputType": "IN"
+		},
+		{
+			"key": "credsUri",
+			"dataType": "STRING_VALUE",
+			"defaultValue": {
+				"stringValue": "https://apigee.googleapis.com/v1/organizations/$apigeeOrg$/developers/$developerEmail$/apps/$clientAppName$/keys"
+			}
+		},
+		{
+			"key": "`Task_3_responseHeader`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_3"
+		},
+		{
+			"key": "`Task_3_responseBody`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_3"
+		},
+		{
+			"key": "`Task_3_responseStatus`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_3"
+		},
+		{
+			"key": "credsPayload",
+			"dataType": "JSON_VALUE",
+			"defaultValue": {
+				"jsonValue": "{\n  \"consumerKey\": \"$clientId$\",\n  \"consumerSecret\": \"$secret$\"\n}"
+			},
+			"jsonSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"consumerSecret\": {\n      \"type\": \"string\"\n    },\n    \"consumerKey\": {\n      \"type\": \"string\"\n    },\n    \"expiresInSeconds\": {\n      \"type\": \"string\"\n    }\n  }\n}"
+		},
+		{
+			"key": "apigeeKey",
+			"dataType": "STRING_VALUE"
+		},
+		{
+			"key": "deleteKeyUri",
+			"dataType": "STRING_VALUE",
+			"defaultValue": {
+				"stringValue": "https://apigee.googleapis.com/v1/organizations/$apigeeOrg$/developers/$developerEmail$/apps/$clientAppName$/keys/$apigeeKey$"
+			}
+		},
+		{
+			"key": "`Task_5_responseHeader`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_5"
+		},
+		{
+			"key": "`Task_5_responseBody`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_5"
+		},
+		{
+			"key": "`Task_5_responseStatus`",
+			"dataType": "STRING_VALUE",
+			"isTransient": true,
+			"producer": "1_5"
+		}
+	],
+	"databasePersistencePolicy": "",
+	"cloudLoggingDetails": {
+		"cloudLoggingSeverity": "",
+		"enableCloudLogging": false
+	}
+}

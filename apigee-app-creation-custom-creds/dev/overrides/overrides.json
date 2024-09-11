@@ -1,0 +1,48 @@
+{
+	"task_overrides": [
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "2",
+			"parameters": {
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$createAppURI$"
+					}
+				}
+			}
+		},
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "3",
+			"parameters": {
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$credsUri$"
+					}
+				}
+			}
+		},
+		{
+			"task": "GenericRestV2Task",
+			"taskId": "5",
+			"parameters": {
+				"url": {
+					"key": "url",
+					"value": {
+						"stringValue": "$deleteKeyUri$"
+					}
+				}
+			}
+		}
+	],
+	"integration_overrides": {
+		"databasePersistencePolicy": "DATABASE_PERSISTENCE_POLICY_UNSPECIFIED",
+		"enableVariableMasking": false,
+		"cloudLoggingDetails": {
+			"cloudLoggingSeverity": "CLOUD_LOGGING_SEVERITY_UNSPECIFIED",
+			"enableCloudLogging": false
+		}
+	}
+}
